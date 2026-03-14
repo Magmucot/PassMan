@@ -68,7 +68,7 @@ class PasswordManager:
         if not self.verify_password(password, self._master_hash):
             raise PasswordIncorrectError("Пароль некорректен!")
         kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(), length=32, salt=self._salt, iterations=100000
+            algorithm=hashes.SHA256(), length=32, salt=self._salt, iterations=700000
         )
         key = base64.urlsafe_b64encode(kdf.derive(password.encode("utf-8")))
         fernet = Fernet(key)
